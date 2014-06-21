@@ -356,7 +356,7 @@ function getClassFileContents( item ) {
 		if(processedElements[i] == "") continue;
 
 
-		trace (processedElementsTwo[processedElements[i]]);
+		// trace (processedElementsTwo[processedElements[i]]);
 
 		if(processedElementsTwo[processedElements[i]] == 'text' ){
 
