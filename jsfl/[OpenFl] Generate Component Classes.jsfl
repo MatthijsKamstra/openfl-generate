@@ -290,15 +290,20 @@ function main() {
                
         
     }       
-    if(!didAnything) {
-        trace('\nNothing to do here.\n---');
-        
-    } else {
-        trace('\nAll done.\n\n---')
-        
-    }
 
     // [mck] publish just to be sure?
+    var swfname = (docPath.substring(docPath.lastIndexOf('/')+1,docPath.lastIndexOf('.')));
+    fl.getDocumentDOM().exportSWF(path + swfname +".swf", true);
+    fl.getDocumentDOM().save();
+
+    trace('\nexport swf\nsave document\n')
+
+    if(!didAnything) {
+        trace('\nNothing to do here.\n---');
+    } else {
+        trace('\nAll done.\n\n---')        
+    }
+
 }
 
 function getClassFileContents( item ) {
