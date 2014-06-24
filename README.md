@@ -3,24 +3,16 @@ openfl-generate-component-class
 
 A simple way to generate flash component classes for assets later used in [OpenFl](http://www.openfl.org/) in combination with [OpenFl SWF](https://github.com/openfl/swf)
 
------
-
-## swf
-===============================
+**swf**
 _Provides SWF parsing and rendering for C++, Flash and HTML5_
 
-
-
-
 ## WIP
-===============================
-this should work with Flash and C++
 
+this should work with Flash and C++
 not tested with html (yet)
 
-
 ## Using Flash for layout
-===============================
+
 If you want to use assets from Flash in Openfl via swf, you need to export a library item with `Export for ActionScript` checked in the `Symbol Properties`
 
 ![image](img/flash_linkage_screenshot.png)
@@ -46,22 +38,19 @@ var _colomn = cast (layout.getChildByName ("Column"), MovieClip);
 
 
 It's easier to wrap the assets in a class with the correct data.
-
 [see example class](https://github.com/MatthijsKamstra/openfl-generate-component-class/blob/master/example/fla/swf/assets/view/HulkFC.hx)
 
 
 **path**
 
 If you use packagename for the assets (for example : `assets.view.HulkFC`)
-
 To prevent a stackoverflow the packagename `swf` is added
-
 `assets.view` will become `swf.assets.view`
 
 
 
 ## jsfl files
-===============================
+
 **[OpenFl] Generate Component Classes.jsfl**
 
 Find all library items with class definitions that don't have class files and create the class files complete with imports and references for clips on the timeline.
@@ -70,7 +59,6 @@ save as:
 [OpenFl Generate Component Classes.jsfl](https://raw.githubusercontent.com/MatthijsKamstra/openfl-generate-component-class/master/jsfl/%5BOpenFl%5D%20Generate%20Component%20Classes.jsfl)
 
 _How to use:_
-
 run the script (`Command > [OpenFl] Generate Component Classes.jsfl`)
 and next to the FLA the class will be generated
 
@@ -89,10 +77,8 @@ if files are in folders the folder path will be generated into the Linkage class
 ![image](img/flash_lib_screenshot.png)
 
 
-
-
 ## Installing JSFL Scripts
-===============================
+
 Find your Flash configuration folder:
 
 **On the Mac**: Navigate to `~/Library/Application Support/Adobe/Flash CC/en_US/Configuration/`
