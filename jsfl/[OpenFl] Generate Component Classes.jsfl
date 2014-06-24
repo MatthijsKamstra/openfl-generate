@@ -45,6 +45,8 @@ var processedElementsTwo = [];
 // shortcut to trace
 trace = fl.outputPanel.trace;
 
+var prefix = "swf";
+
 
 //-----------------------------
 // FUNCTIONS
@@ -95,9 +97,6 @@ function getVarForElement(el) {
 	
     switch( el.elementType ) 
     {
-	
-		
-	
         case "instance": 
 			// If class attached, import it and use the
 			// base name, otherwise use the MovieClip class
@@ -248,6 +247,15 @@ function main() {
         var className = folders.pop();
                   
         
+		// trace ("folders: " + folders);
+		
+		// [mck] hack a little prefix in the folder structure
+		// folders[0] = prefix + folders[0]
+		folders.unshift(prefix)
+
+		// trace ("folders: " + folders);
+		
+
         // check for folder  
         var folderPath = "";
         for( var i=0; i<folders.length; i++) {     
@@ -289,6 +297,8 @@ function main() {
         trace('\nAll done.\n\n---')
         
     }
+
+    // [mck] publish just to be sure?
 }
 
 function getClassFileContents( item ) {
@@ -315,6 +325,8 @@ function getClassFileContents( item ) {
 	// print vars
     dtrace("\n\t// children on stage\n\t//--------------------");
 	
+    var as = "";
+
 	// process all layers
     for(l=0; l<timeline.layers.length; l++) 
     {     
@@ -322,6 +334,12 @@ function getClassFileContents( item ) {
                        
         var varlines = "";
 
+        if(timeline.layers[l].frames[0].actionScript != ""){
+        	as += "\n\t// AS on layer '"+timeline.layers[l].name+"'";
+			// trace ("actionscript: " + timeline.layers[l].frames[0].actionScript);
+			var _astemp = timeline.layers[l].frames[0].actionScript
+			as += _astemp.split('var').join('\n\tpublic var ').split("Number").join("Float").split("Boolean").join("Bool").split("int").join("Int").split("Object").join("Dynamic").split("Array").join("Array<Dynamic>");
+        }
 		
         // process all frames
         for(f=0; f<timeline.layers[l].frames.length; f++) 
@@ -339,7 +357,10 @@ function getClassFileContents( item ) {
 		}
     }                                                         
     
-    dtrace( "\n\n\t/**\n\t * \n\t */");
+    dtrace( as );
+
+    // dtrace( "\n\n\t/**\n\t * \n\t */");
+    dtrace( "\n\t// constructor");
 	dtrace( "\tpublic function new()\n\t{"); 
 	dtrace( "\t\t// trace( '+ "+timelineClass+"."+timelineClass+"' );");
 	dtrace( "\t\tsuper();");
@@ -348,7 +369,12 @@ function getClassFileContents( item ) {
 	dtrace( "\t");
 	dtrace( "\tprivate function init():Void");
 	dtrace( "\t{");
-	dtrace( "\t\t_mc = Assets.getMovieClip(\"lib:"+timelineClass+"\");");
+	// dtrace( "\t\t_mc = Assets.getMovieClip(\"lib:"+timelineClass+"\");");
+	if (getPackage(item) == ""){
+		dtrace( "\t\t_mc = Assets.getMovieClip(\"lib:"+timelineClass+"\");");
+	} else {
+		dtrace( "\t\t_mc = Assets.getMovieClip(\"lib:"+getPackage(item)+"."+timelineClass+"\");");
+	}
 	dtrace( "\t\tthis.addChild(_mc);");
 	dtrace( "\t\t");
 
@@ -404,8 +430,12 @@ function getClassFileContents( item ) {
     dtrace( "\n}" );
 	
 	// OUTPUT...
-                                               
-	var retVal = "package " + getPackage(item) + ";\n"; 
+    // [mck] hack a little prefix in the package  
+	var retVal = "package " + prefix + "." + getPackage(item) + ";\n"; 
+    if(getPackage(item) == ""){
+    	retVal = "package " + prefix + ";\n"; 
+
+    }                                    
     
     // print imports using regular trace
 	retVal += "\nimport openfl.Assets;"
