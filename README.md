@@ -1,40 +1,67 @@
 openfl-generate-component-class
 ===============================
 
-A simple way to generate component classes for assets later used in [OpenFl](http://www.openfl.org/)
+A simple way to generate flash component classes for assets later used in [OpenFl](http://www.openfl.org/) in combination with [OpenFl SWF](https://github.com/openfl/swf)
 
+-----
 
-Used in combination with [OpenFl SWF](https://github.com/openfl/swf)
-
+## swf
+===============================
 _Provides SWF parsing and rendering for C++, Flash and HTML5_
 
-If you want to use assets from Flash, you need to export the assets "Export for ActionScript"
+
+
+
+## WIP
+===============================
+this should work with Flash and C++
+
+not tested with html (yet)
+
+
+## Using Flash for layout
+===============================
+If you want to use assets from Flash in Openfl via swf, you need to export a library item with `Export for ActionScript` checked in the `Symbol Properties`
 
 ![image](img/flash_linkage_screenshot.png)
 
-The default message you get is:
+Proceed as normal you will get this default message (if you didn't disabled it before):
 
 ![image](img/flash_message_screenshot.png)
 
-which works great for Flash, but not for C++.
+which works great for Flash, but not for C++ (html not tested).
 
+Normally I use Flash to position my assets
+When you use Flash for layout, it's a lot of work to 'find' all the assets used in the Movieclip when you use C++ as a target
 
-When you use Flash for layout, its a lot of work to 'find' all the assets used in the Movieclip
+**example**
 
 ```
 var layout = Assets.getMovieClip ("layout:Layout");
 addChild (layout);
-var _bg     = layout.getChildByName ("Background");
-var _header = layout.getChildByName ("Header");
-var _colomn = layout.getChildByName ("Column");
+var _bg     = cast (layout.getChildByName ("Background"), MovieClip);
+var _header = cast (layout.getChildByName ("Header"), MovieClip);
+var _colomn = cast (layout.getChildByName ("Column"), MovieClip);
 ```			
 
-It's easier to wrap the assets with the correct data.
 
-===============================
+It's easier to wrap the assets in a class with the correct data.
+
+[see example class](https://github.com/MatthijsKamstra/openfl-generate-component-class/blob/master/example/fla/swf/assets/view/HulkFC.hx)
+
+
+**path**
+
+If you use packagename for the assets (for example : `assets.view.HulkFC`)
+
+To prevent a stackoverflow the packagename `swf` is added
+
+`assets.view` will become `swf.assets.view`
+
+
 
 ## jsfl files
-
+===============================
 **[OpenFl] Generate Component Classes.jsfl**
 
 Find all library items with class definitions that don't have class files and create the class files complete with imports and references for clips on the timeline.
@@ -44,10 +71,8 @@ save as:
 
 _How to use:_
 
-run the script (Command > [OpenFl] enerate Component Classes.jsfl)
+run the script (`Command > [OpenFl] Generate Component Classes.jsfl`)
 and next to the FLA the class will be generated
-
-
 
 **[OpenFl] Auto Flash Class.jsfl**
 
@@ -58,15 +83,16 @@ save as:
 
 _How to use:_
 
-select the items in the libary and start script (Command > [OpenFl] Auto Flash Class.jsfl)
+select the items in the libary and start script (`Command > [OpenFl] Auto Flash Class.jsfl`)
 if files are in folders the folder path will be generated into the Linkage class
 
 ![image](img/flash_lib_screenshot.png)
 
 
-===============================
-## Installing JSFL Scripts
 
+
+## Installing JSFL Scripts
+===============================
 Find your Flash configuration folder:
 
 **On the Mac**: Navigate to `~/Library/Application Support/Adobe/Flash CC/en_US/Configuration/`
