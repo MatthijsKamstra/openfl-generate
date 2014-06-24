@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="SwfAssets" package="com.example.SwfAssets" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="SwfAssets" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="swf" />
+
+	<library id="lib" path="Fla/assets.swf" rename="assets/library.swf" />
+	
+	<assets path="Assets" rename="assets" exclude="openfl.svg" />
+	<icon path="Assets/openfl.svg" />
+	
+</project>
