@@ -1,4 +1,4 @@
-openfl-generate-component-class
+openfl-generate
 ===============================
 
 A simple way to generate flash component classes for assets later used in [OpenFl](http://www.openfl.org/) in combination with [OpenFl SWF](https://github.com/openfl/swf)
