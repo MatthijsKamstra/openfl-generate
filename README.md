@@ -6,10 +6,31 @@ A simple way to generate flash component classes for assets later used in [OpenF
 **swf**
 _Provides SWF parsing and rendering for C++, Flash and HTML5_
 
+More documentation about the usage of SWF: [Unofficial documentation SWF](swf.md)
+
+
 ## WIP
 
-this should work with Flash and C++
-not tested with html (yet)
+this works with Flash
+with some adjustments it works with C++
+not tested with html
+
+currently it will only work with movieclips, dynamic textfields, static textfields and shapes (only Movieclips and Textfields will be registered)
+
+## Learnings
+
+important: (not sure if this has any effect) export with version `Flash Player 10.3`
+
+* don't use embedded fonts when exporting for C++ they look ugly
+* don't use mask for MovieClips 
+* no timeline animation with tweens 
+
+## TODO
+
+* nested movieclips with linkage names
+* timeline 
+* embedded fonts / dynamic fonts
+* 
 
 ## Using Flash for layout
 

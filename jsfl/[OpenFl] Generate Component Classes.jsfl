@@ -1,4 +1,11 @@
 ﻿/**
+ * version 1.2 - actionscript first frame timeline converted to vars 
+ * version 1.1 - prefix package 'swf' to prevend stackoverflow 
+ * version 1.0 - initial convert jsfl to haxe/openfl 
+ */
+
+
+/**
  * JSFL
  * 
  * Bumpslide AppComponent Class File Generator

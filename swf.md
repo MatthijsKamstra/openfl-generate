@@ -2,7 +2,15 @@ Welcome to the openfl-generate-component-class wiki!
 
 **unofficial [swf](https://github.com/openfl/swf) documentation**
 
-WIP
+**swf**
+_Provides SWF parsing and rendering for C++, Flash and HTML5_
+
+# WIP
+
+Swf works great with Flash!
+Don't use embedded fonts for C++!
+
+# source
 
 source [https://github.com/openfl/swf](https://github.com/openfl/swf)
 
